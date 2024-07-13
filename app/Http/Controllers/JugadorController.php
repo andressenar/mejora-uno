@@ -12,7 +12,9 @@ class JugadorController extends Controller
      */
     public function index()
     {
-        //
+        $jugador = Jugador::orderBy('id', 'desc')->get();
+        return view('jugador.index', compact('jugador'));
+
     }
 
     /**
@@ -20,7 +22,7 @@ class JugadorController extends Controller
      */
     public function create()
     {
-        //
+        return view('jugador.create');
     }
 
     /**
@@ -28,7 +30,16 @@ class JugadorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /* dd($request->all()); */
+        $jugador = new Jugador();
+        $jugador->fecha_nac = $request->fecha_nac;
+        $jugador->codigo = $request->codigo;
+        $jugador->nombre = $request->nombre;
+        $jugador->posicion = $request->posicion;
+        
+        
+        $jugador->save();
+        return redirect()->route('jugador.index');
     }
 
     /**
@@ -36,7 +47,7 @@ class JugadorController extends Controller
      */
     public function show(Jugador $jugador)
     {
-        //
+        return view('jugador.show',compact('jugador'));
     }
 
     /**
@@ -44,7 +55,7 @@ class JugadorController extends Controller
      */
     public function edit(Jugador $jugador)
     {
-        //
+        return view('jugador.edit',compact('jugador'));
     }
 
     /**
@@ -52,7 +63,16 @@ class JugadorController extends Controller
      */
     public function update(Request $request, Jugador $jugador)
     {
-        //
+        
+        
+        $jugador->fecha_nac = $request->fecha_nac;
+        $jugador->codigo = $request->codigo;
+        $jugador->nombre = $request->nombre;
+        $jugador->posicion = $request->posicion;
+        
+        
+        $jugador->save();
+        return redirect()->route('jugador.index');
     }
 
     /**
@@ -60,6 +80,7 @@ class JugadorController extends Controller
      */
     public function destroy(Jugador $jugador)
     {
-        //
+        $jugador->delete();
+        return redirect()->route('jugador.index');
     }
 }

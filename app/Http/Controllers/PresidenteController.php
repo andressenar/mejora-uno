@@ -12,7 +12,9 @@ class PresidenteController extends Controller
      */
     public function index()
     {
-        //
+        $presidente = Presidente::orderBy('id', 'desc')->get();
+        return view('presidente.index', compact('presidente'));
+
     }
 
     /**
@@ -20,7 +22,7 @@ class PresidenteController extends Controller
      */
     public function create()
     {
-        //
+        return view('presidente.create');
     }
 
     /**
@@ -28,23 +30,32 @@ class PresidenteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /* dd($request->all()); */
+        $presidente = new Presidente();
+        $presidente->dni = $request->dni;
+        $presidente->nombre = $request->nombre;
+        $presidente->apellidos = $request->apellidos;
+        $presidente->año = $request->año;
+        $presidente->fecha_nac = $request->fecha_nac;
+        
+        $presidente->save();
+        return redirect()->route('presidente.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Presidente $presidente)
+    public function show(Presidente $destino)
     {
-        //
+        return view('presidente.show',compact('presidente'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Presidente $presidente)
+    public function edit(Presidente $destino)
     {
-        //
+        return view('presidente.edit',compact('presidente'));
     }
 
     /**
@@ -52,7 +63,16 @@ class PresidenteController extends Controller
      */
     public function update(Request $request, Presidente $presidente)
     {
-        //
+        
+        
+        $presidente->dni = $request->dni;
+        $presidente->nombre = $request->nombre;
+        $presidente->apellidos = $request->apellidos;
+        $presidente->año = $request->año;
+        $presidente->fecha_nac = $request->fecha_nac;
+        
+        $presidente->save();
+        return redirect()->route('presidente.index');
     }
 
     /**
@@ -60,6 +80,7 @@ class PresidenteController extends Controller
      */
     public function destroy(Presidente $presidente)
     {
-        //
+        $presidente->delete();
+        return redirect()->route('presidente.index');
     }
 }

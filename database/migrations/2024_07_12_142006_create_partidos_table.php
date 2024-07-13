@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('goles_casa');
             $table->date('fecha');
 
-            $table->unsignedBigInteger('gol_id');
+            $table->unsignedBigInteger('gol_id')->nullable();
             $table->foreign('gol_id')
             ->references('id')->on('gols')
             ->onDelete('cascade');

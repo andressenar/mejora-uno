@@ -17,15 +17,15 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('ciudad');
             $table->string('estadio');
-            $table->year('año');
+            $table->integer('año');
             $table->integer('aforo');
 
-            $table->unsignedBigInteger('presidente_id');
+            $table->unsignedBigInteger('presidente_id')->nullable();
             $table->foreign('presidente_id')
             ->references('id')->on('presidentes')
             ->onDelete('cascade');
 
-            $table->unsignedBigInteger('jugador_id');
+            $table->unsignedBigInteger('jugador_id')->nullable();
             $table->foreign('jugador_id')
             ->references('id')->on('jugadors')
             ->onDelete('cascade');

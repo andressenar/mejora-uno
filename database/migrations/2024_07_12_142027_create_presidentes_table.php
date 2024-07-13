@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('presidentes', function (Blueprint $table) {
             $table->id();
             $table->integer('dni');
-            $table->integer('nombre');
-            $table->integer('apellidos');
-            $table->year('año');
+            $table->string('nombre');
+            $table->string('apellidos');
+            $table->integer('año');
             $table->date('fecha_nac');
             
             $table->timestamps();
